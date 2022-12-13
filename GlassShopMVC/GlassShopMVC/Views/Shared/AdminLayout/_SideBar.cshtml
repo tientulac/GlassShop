@@ -1,0 +1,79 @@
+﻿    <!-- Sidebar -->
+<div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <div class="user">
+                <div class="avatar-sm float-left mr-2">
+                    <img src="../Content/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                </div>
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                            <p style="margin: 0 0" id="name_acc_sidebar"></p>
+                            <span class="user-level">Administrator</span>
+                            <span class="caret"></span>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <ul class="nav nav-primary">
+                <li class="nav-item active">
+                    <a href="/Dashboard/Index" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Components</h4>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#base">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Master Data</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="/Category/Index">
+                                    <span class="sub-item">Category</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Brand/Index">
+                                    <span class="sub-item">Brand</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Discount/Index">
+                                    <span class="sub-item">Discount</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/Product/Index">
+                        <i class="fa fa-box" aria-hidden="true"></i>
+                        <p>Product</p>
+                    </a>
+                </li>
+                @*<li class="mx-4 mt-2">
+            <a href="http://themekita.com/atlantis-bootstrap-dashboard.html" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>Buy Pro</a>
+        </li>*@
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Sidebar -->
+
+<script>
+    $(document).ready(function () {
+        var info = JSON.parse(localStorage.getItem('UserInfo'));
+        $('#name_acc_sidebar').html(info.UserName);
+    });
+</script>

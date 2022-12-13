@@ -1,0 +1,506 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout/_Main.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<div class="content">
+    <div class="panel-header bg-primary-gradient">
+        <div class="page-inner py-5">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                <div>
+                    <h2 class="text-white pb-2 fw-bold">Product</h2>
+                    <h5 class="text-white op-7 mb-2">Home/Admin/Product</h5>
+                </div>
+                <div class="ml-md-auto py-2 py-md-0">
+                    <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
+                    <a href="#" class="btn btn-secondary btn-round" data-toggle="modal" data-target="#addModal" onclick="openAddModal()">Add new</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-inner mt--5">
+        <div class="row mt--2">
+            <div class="col-md-12">
+                <div class="card full-height">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive table-hover table-sales">
+                                    <table id="table_cate" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Amount</th>
+                                                <th>Material</th>
+                                                <th>Gender</th>
+                                                <th>Origin</th>
+                                                <th>Thumbnail</th>
+                                                <th>Status</th>
+                                                <th>Category</th>
+                                                <th>Brand</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var f in @ViewBag.ListProduct)
+                                            {
+                                                <tr>
+                                                    <td>@f.ProductId</td>
+                                                    <td>@f.ProductCode</td>
+                                                    <td>@f.ProductName</td>
+                                                    <td>@f.UnitPrice</td>
+                                                    <td>@f.Amount</td>
+                                                    <td>@f.Material</td>
+                                                    <td>@f.GenderName</td>
+                                                    <td>@f.Origin</td>
+                                                    <td><img src="@f.Thumbnail" alt="Alternate Text" style="width:50px;height:50px;" /></td>
+                                                    @if (f.Status == 1)
+                                                    {
+                                                        <td style="color: green;font-weight: bold">@f.StatusName</td>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style="color: red;font-weight: bold">@f.StatusName</td>
+
+                                                    }
+                                                    <td>@f.CategoryName</td>
+                                                    <td>@f.BrandName</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#addModal" style="margin-right: 5px;" onclick="openUpdateModal(@f.ProductId)">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="openDeleteModal(@f.ProductId)" data-toggle="modal" data-target="#deleteModal">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning btn-sm" onclick="openImageModal(@f.ProductId)" style="margin-right: 5px;" data-toggle="modal" data-target="#imageModal">
+                                                            <i class="fas fa-image"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="openColorModal(@f.ProductId)" style="margin-right: 5px;" data-toggle="modal" data-target="#colorModal">
+                                                            <i class="fas fa-pencil-ruler"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Insert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <form id="bouqueti-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="required" for="inputEmail4">ProductCode</label>
+                                <input type="text" class="form-control contact-method" id="ProductCode" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="required" for="inputEmail4">ProductName</label>
+                                <input type="text" class="form-control contact-method" id="ProductName" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="required" for="inputEmail4">UnitPrice</label>
+                                <input type="text" class="form-control contact-method" id="UnitPrice" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="required" for="inputEmail4">Descrip</label>
+                                <input type="text" class="form-control contact-method" id="Descrip" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="required" for="inputEmail4">Amount</label>
+                                <input type="number" class="form-control contact-method" id="Amount" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="required" for="inputEmail4">Material</label>
+                                <input type="text" class="form-control contact-method" id="Material" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="required" for="inputEmail4">Origin</label>
+                                <input type="text" class="form-control contact-method" id="Origin" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="required" for="inputEmail4">Thumbnail</label>
+                                <input type="text" class="form-control contact-method" id="Thumbnail" placeholder="Input">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cate">Category</label>
+                                <select class="form-control" id="CategoryId">
+                                    <option value="" selected>Choose category</option>
+                                    @foreach (var c in ViewBag.ListCategory)
+                                    {
+                                        <option value="@c.CategoryId">@c.CategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cate">Brand</label>
+                                <select class="form-control" id="BrandId">
+                                    <option value="" selected>Choose brand</option>
+                                    @foreach (var c in ViewBag.ListBrand)
+                                    {
+                                        <option value="@c.BrandId">@c.BrandName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cate">Gender</label>
+                                <select class="form-control" id="Gender">
+                                    <option value="" selected>Choose gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Both</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete this record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 style="text-align:center">Are you sure want to delete this record ??</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteItem()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="topicModalLabel">Add Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group col-md-9">
+                        <label class="required" for="inputEmail4">Image (PasteLink)</label>
+                        <input style="width: 100%" type="text" class="form-control contact-method" id="ProductImage">
+                    </div>
+                    <input type="button" class="btn-sm btn-primary mb-2" onclick="addImage()" value="Add Image Product">
+                </form>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product_image">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="colorModal" tabindex="-1" role="dialog" aria-labelledby="colorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="topicModalLabel">Add Color</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group col-md-9">
+                        <label class="required" for="inputEmail4">Color</label>
+                        <input type="color" id="ProductColor">
+                    </div>
+                    <input type="button" class="btn-sm btn-primary mb-2" onclick="addColor()" value="Add Color Product">
+                </form>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product_color">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var id_record = 0;
+    var dataUpdate = {};
+    var status = 1;
+
+    openAddModal = () => {
+        id_record = 0;
+        $('#ProductCode').val('');
+        $('#ProductName').val('');
+        $('#UnitPrice').val('');
+        $('#Descrip').val('');
+        $('#Amount').val('');
+        $('#Material').val('');
+        $('#Gender').val('');
+        $('#Origin').val('');
+        $('#Thumbnail').val('');
+        $('#CategoryId').val('');
+        $('#BrandId').val('');
+    };
+
+    // Example POST method implementation:
+    async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    $(document).ready(function () {
+        $('#table_cate').DataTable();
+    });
+
+    submit = () => {
+        var req = {
+            ProductId: id_record,
+            ProductCode: $('#ProductCode').val(),
+            ProductName: $('#ProductName').val(),
+            UnitPrice: $('#UnitPrice').val(),
+            Descrip: $('#Descrip').val(),
+            Amount: $('#Amount').val(),
+            Material: $('#Material').val(),
+            Gender: $('#Gender').val(),
+            Origin: $('#Origin').val(),
+            Thumbnail: $('#Thumbnail').val(),
+            CategoryId: $('#CategoryId').val(),
+            BrandId: $('#BrandId').val(),
+        }
+
+        postData('/Product/Save', req)
+            .then((data) => {
+                if (data.success) {
+                    toastr.success('Successfully !');
+                    $('.modal').modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            });
+    }
+
+    openDeleteModal = (id) => {
+        id_record = id;
+    }
+
+    openUpdateModal = (id) => {
+        id_record = id;
+        $.ajax({
+            url: '/Product/FindById?id=' + id,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    $('#ProductCode').val(result.data.ProductCode);
+                    $('#ProductName').val(result.data.ProductName);
+                    $('#UnitPrice').val(result.data.UnitPrice);
+                    $('#Descrip').val(result.data.Descrip);
+                    $('#Amount').val(result.data.Amount);
+                    $('#Material').val(result.data.Material);
+                    $('#Gender').val(result.data.Gender);
+                    $('#Origin').val(result.data.Origin);
+                    $('#Thumbnail').val(result.data.Thumbnail);
+                    $('#CategoryId').val(result.data.CategoryId);
+                    $('#BrandId').val(result.data.BrandId);
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+    deleteItem = () => {
+        $.ajax({
+            url: '/Product/Delete?id=' + id_record,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    toastr.success('Successfully !');
+                    $('.modal').modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+
+    openImageModal = (id) => {
+        id_record = id;
+        $.ajax({
+            url: '/Product/GetListImage?id=' + id_record,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    var temp = '';
+                    for (var item of result.data) {
+                        temp += `<tr>
+                                <td>${item.ProductImageId}</td>
+                                <td><img src="${item.Image}" style="width: 50px; height: 50px" alt="Alternate Text" /></td>
+                                <td>
+                                    <button class="btn btn-outline-danger btn-sm" onclick="deleteImage(${item.ProductImageId})">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>`
+                    }
+                    $('#product_image').html(temp);
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+    openColorModal = (id) => {
+        id_record = id;
+        $.ajax({
+            url: '/Product/GetListColor?id=' + id_record,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    var temp = '';
+                    for (var item of result.data) {
+                        temp += `<tr>
+                                <td>${item.ProductColorId}</td>
+                                <td><div style="width: 50px; height: 50px;background-color:${item.Color}"></div></td>
+                                <td>
+                                    <button class="btn btn-outline-danger btn-sm" onclick="deleteImage(${item.ProductColorId})">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>`
+                    }
+                    $('#product_color').html(temp);
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+    addColor = () => {
+        var req = {
+            ProductId: id_record,
+            Color: $('#ProductColor').val()
+        }
+        postData('/ProductColor/Save', req)
+            .then((data) => {
+                if (data.success) {
+                    toastr.success('Successfully !');
+                    $('.modal').modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            });
+    }
+
+    deleteImage = (id) => {
+        $.ajax({
+            url: '/Product/DeleteColor?id=' + id,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    toastr.success('Successfully !');
+                    $('.modal').modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+</script>
