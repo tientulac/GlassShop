@@ -1296,6 +1296,8 @@ namespace GlassShopMVC.Models
 		
 		private System.Nullable<int> _AccountId;
 		
+		private System.Nullable<int> _Status;
+		
 		private EntitySet<OrderProduct> _OrderProducts;
 		
 		private EntityRef<Account> _Account;
@@ -1310,6 +1312,8 @@ namespace GlassShopMVC.Models
     partial void OnCreatedAtChanged();
     partial void OnAccountIdChanging(System.Nullable<int> value);
     partial void OnAccountIdChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public Order()
@@ -1379,6 +1383,26 @@ namespace GlassShopMVC.Models
 					this._AccountId = value;
 					this.SendPropertyChanged("AccountId");
 					this.OnAccountIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}

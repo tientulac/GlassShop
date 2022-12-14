@@ -174,9 +174,12 @@
     <Compile Include="Controllers\ProductColorController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
+    <Compile Include="Controllers\UserLayoutController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\AccountDTO.cs" />
+    <Compile Include="Models\DTO\CartItemDTO.cs" />
     <Compile Include="Models\DTO\OrderDTO.cs" />
     <Compile Include="Models\DTO\ProductColorDTO.cs" />
     <Compile Include="Models\DTO\ProductDTO.cs" />
@@ -692,6 +695,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Dashboard\Login.cshtml" />
+    <Content Include="Views\UserLayout\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

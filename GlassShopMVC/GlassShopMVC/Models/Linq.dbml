@@ -63,6 +63,7 @@
       <Column Name="OrderId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="AccountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderId" OtherKey="OrderId" Type="OrderProduct" />
       <Association Name="Account_Order" Member="Account" ThisKey="AccountId" OtherKey="AccountId" Type="Account" IsForeignKey="true" />
     </Type>

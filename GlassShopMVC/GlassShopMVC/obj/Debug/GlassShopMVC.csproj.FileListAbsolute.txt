@@ -72,7 +72,6 @@ D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\bin\System.Web.W
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\bin\Newtonsoft.Json.xml
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\bin\Antlr3.Runtime.pdb
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\obj\Debug\GlassShopMVC.csproj.AssemblyReference.cache
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\obj\Debug\GlassShopMVC.csproj.CoreCompileInputs.cache
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\obj\Debug\GlassShopMVC.csproj.CopyComplete
 D:\TienNN\DoAnWeb\GlassShop\GlassShop\GlassShopMVC\GlassShopMVC\obj\Debug\GlassShopMVC.dll

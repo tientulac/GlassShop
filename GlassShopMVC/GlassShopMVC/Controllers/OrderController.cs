@@ -28,6 +28,12 @@ namespace GlassShopMVC.Controllers
         public ActionResult Delete(int id = 0)
         {
             var order = db.Orders.Where(x => x.OrderId == id).FirstOrDefault();
+            var orderItem = db.OrderProducts.Where(x => x.OrderId == order.OrderId);
+            if (orderItem.Any())
+            {
+                db.OrderProducts.DeleteAllOnSubmit(orderItem);
+                db.SubmitChanges();
+            }
             db.Orders.DeleteOnSubmit(order);
             db.SubmitChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
